@@ -1,0 +1,34 @@
+<article class="temple-card">
+  <a
+    class="card-link"
+    [routerLink]="['/navagraha', temple().slug]"
+    [attr.aria-label]="label('viewDetails') + ': ' + content().name"
+  >
+    <div class="card-image">
+      <img
+        [src]="temple().imagePath"
+        [alt]="content().imageAlt"
+        loading="lazy"
+        decoding="async"
+        (error)="onImageError($event)"
+      />
+      <span class="image-shade" aria-hidden="true"></span>
+      <span class="planet-tag">{{ planetName() }}</span>
+      <span class="image-location">{{ content().location }}</span>
+    </div>
+
+    <div class="card-content">
+      <div class="card-heading">
+        <div>
+          <h2>{{ content().name }}</h2>
+          @if (language() !== 'ta') {
+            <p class="tamil-name" lang="ta">{{ temple().translations.ta.name }}</p>
+          }
+        </div>
+        <span class="card-arrow" aria-hidden="true">↗</span>
+      </div>
+      <p class="card-description">{{ content().description }}</p>
+      <span class="details-link">{{ label('viewDetails') }} <span aria-hidden="true">→</span></span>
+    </div>
+  </a>
+</article>

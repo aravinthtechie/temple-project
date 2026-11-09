@@ -1,0 +1,29 @@
+<section class="gallery-page">
+  <div class="gallery-hero">
+    <div class="hero-copy">
+      <p class="eyebrow"><span aria-hidden="true">✦</span> {{ text('galleryEyebrow') }}</p>
+      <h1>{{ text('galleryTitle') }}</h1>
+      <p class="hero-description">{{ text('galleryDescription') }}</p>
+      <p class="journey-note"><span class="journey-line" aria-hidden="true"></span>{{ text('journey') }}</p>
+    </div>
+    <div class="hero-art" aria-hidden="true">
+      <div class="orbit orbit-one"></div>
+      <div class="orbit orbit-two"></div>
+      <div class="orbit orbit-three"></div>
+      <span class="orbit-star star-one">✦</span>
+      <span class="orbit-star star-two">✧</span>
+      <span class="orbit-core">ॐ</span>
+    </div>
+  </div>
+
+  <div class="gallery-intro">
+    <span>{{ text('templeCount') }}</span>
+    <span class="intro-rule" aria-hidden="true"></span>
+  </div>
+
+  <div class="temple-grid">
+    @for (temple of temples; track temple.slug) {
+      <app-temple-card [temple]="temple" [language]="language()" />
+    }
+  </div>
+</section>

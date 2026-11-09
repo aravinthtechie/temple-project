@@ -1,0 +1,376 @@
+.tour-page {
+  width: min(100% - 64px, 1120px);
+  margin: 0 auto;
+  padding: 31px 0 90px;
+}
+
+.back-link {
+  color: var(--muted);
+  font-size: 12px;
+  text-decoration: none;
+}
+
+.back-link:hover {
+  color: var(--accent-strong);
+}
+
+.tour-hero {
+  position: relative;
+  display: grid;
+  min-height: 386px;
+  grid-template-columns: minmax(0, 1fr) 250px;
+  align-items: center;
+  gap: 30px;
+  overflow: hidden;
+  padding: 48px 6%;
+  border-bottom: 1px solid var(--line);
+}
+
+.tour-hero > div:first-child {
+  position: relative;
+  z-index: 1;
+}
+
+.eyebrow {
+  margin: 0 0 13px;
+  color: var(--accent-strong);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  line-height: 1.6;
+  text-transform: uppercase;
+}
+
+.tour-hero h1,
+.section-heading h2,
+.estimate-section h2 {
+  max-width: 700px;
+  margin: 0;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: clamp(42px, 5.5vw, 65px);
+  font-weight: 400;
+  letter-spacing: -0.045em;
+  line-height: 1.06;
+}
+
+.tour-summary {
+  max-width: 660px;
+  margin: 17px 0;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.75;
+}
+
+.tour-facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 21px;
+}
+
+.tour-facts span {
+  padding: 7px 10px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--muted);
+  font-size: 10px;
+}
+
+.tour-art {
+  position: relative;
+  display: grid;
+  width: 220px;
+  aspect-ratio: 1;
+  place-items: center;
+  border: 1px solid color-mix(in srgb, var(--gold) 65%, var(--line));
+  border-radius: 50%;
+  color: var(--gold);
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 24px;
+  background: radial-gradient(circle, color-mix(in srgb, var(--gold) 12%, transparent), transparent 68%);
+}
+
+.tour-art::before,
+.tour-art::after {
+  position: absolute;
+  inset: 14%;
+  border: 1px solid color-mix(in srgb, var(--gold) 55%, transparent);
+  border-radius: 50%;
+  content: '';
+}
+
+.tour-art::after {
+  inset: 29%;
+}
+
+.tour-art i {
+  position: absolute;
+  top: 20%;
+  right: 12%;
+  font-size: 20px;
+  font-style: normal;
+}
+
+.primary-button {
+  display: inline-flex;
+  min-height: 45px;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  padding: 0 17px;
+  border: 1px solid var(--accent);
+  border-radius: 2px;
+  color: #fff;
+  background: var(--accent);
+  font: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.primary-button:hover {
+  border-color: var(--accent-strong);
+  background: var(--accent-strong);
+}
+
+.itinerary-section,
+.faq-section {
+  padding: 68px 0;
+}
+
+.section-heading {
+  max-width: 720px;
+  margin-bottom: 28px;
+}
+
+.section-heading h2,
+.estimate-section h2 {
+  font-size: clamp(32px, 4vw, 45px);
+}
+
+.section-heading > p:last-child {
+  margin: 13px 0 0;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.75;
+}
+
+.itinerary-days {
+  border-top: 1px solid var(--line);
+}
+
+.itinerary-day {
+  display: grid;
+  grid-template-columns: 150px minmax(0, 1fr);
+  gap: 20px;
+  padding: 26px 0 28px;
+  border-bottom: 1px solid var(--line);
+}
+
+.day-index {
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+}
+
+.day-index span {
+  display: block;
+  margin-top: 7px;
+  color: var(--gold);
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 30px;
+  font-weight: 400;
+  letter-spacing: normal;
+}
+
+.day-content h3,
+.faq-item h3 {
+  margin: 0;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 22px;
+  font-weight: 500;
+}
+
+.day-content > p,
+.faq-item p,
+.estimate-section > p:not(.eyebrow) {
+  margin: 9px 0 0;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.day-content ol {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 17px 0 15px;
+  padding: 0;
+  list-style: none;
+}
+
+.day-content li a {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 11px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--accent-strong);
+  font-size: 11px;
+  text-decoration: none;
+}
+
+.day-content li a:hover {
+  border-color: var(--gold);
+}
+
+.overnight {
+  display: flex;
+  align-items: start;
+  gap: 8px;
+  font-size: 12px !important;
+}
+
+.overnight span {
+  color: var(--gold);
+}
+
+.included-section {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 35px;
+  padding: 33px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+}
+
+.included-section h2 {
+  margin: 0;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 25px;
+  font-weight: 500;
+}
+
+.included-section ul {
+  display: grid;
+  gap: 12px;
+  margin: 20px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.included-section li {
+  display: flex;
+  align-items: start;
+  gap: 10px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.included-column li span {
+  color: var(--accent);
+}
+
+.excluded-column li span {
+  color: var(--gold);
+}
+
+.faq-section {
+  padding-bottom: 63px;
+}
+
+.faq-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 13px;
+}
+
+.faq-item {
+  padding: 21px;
+  border: 1px solid var(--line);
+}
+
+.faq-item h3 {
+  font-size: 18px;
+}
+
+.estimate-section {
+  padding: 43px;
+  color: var(--ink);
+  background: color-mix(in srgb, var(--gold) 10%, var(--surface));
+  text-align: center;
+}
+
+.estimate-section .eyebrow {
+  margin-bottom: 10px;
+}
+
+.estimate-section h2 {
+  margin: 0 auto;
+}
+
+.estimate-section > p:not(.eyebrow) {
+  max-width: 680px;
+  margin: 12px auto 0;
+}
+
+.quote-price {
+  display: block;
+  margin-top: 22px;
+  color: var(--accent-strong);
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 20px;
+}
+
+.estimate-section .quote-disclaimer {
+  margin-bottom: 20px !important;
+  font-size: 11px !important;
+}
+
+@media (max-width: 760px) {
+  .tour-page {
+    width: calc(100% - 36px);
+    padding-bottom: 60px;
+  }
+
+  .tour-hero {
+    min-height: 395px;
+    grid-template-columns: minmax(0, 1fr);
+    padding: 39px 0;
+  }
+
+  .tour-art {
+    position: absolute;
+    right: -85px;
+    bottom: -70px;
+    width: 190px;
+    opacity: 0.28;
+  }
+
+  .itinerary-section,
+  .faq-section {
+    padding: 51px 0;
+  }
+
+  .itinerary-day {
+    grid-template-columns: 75px minmax(0, 1fr);
+    gap: 10px;
+  }
+
+  .included-section,
+  .faq-list {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .included-section {
+    gap: 28px;
+    padding: 24px 20px;
+  }
+
+  .estimate-section {
+    padding: 34px 20px;
+  }
+}

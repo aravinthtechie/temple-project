@@ -1,0 +1,102 @@
+@let details = content();
+<article class="tour-page">
+  <a class="back-link" routerLink="/">{{ homeLabel('backToGallery') }}</a>
+
+  <header class="tour-hero">
+    <div>
+      <p class="eyebrow">{{ language() === 'ta' ? 'காவிரி டெல்டா · மாதிரிப் பயணத் திட்டம்' : language() === 'hi' ? 'कावेरी डेल्टा · नमूना यात्रा' : language() === 'fr' ? 'Delta de la Kaveri · Circuit indicatif' : 'CAUVERY DELTA · SAMPLE JOURNEY' }}</p>
+      <h1>{{ details.title }}</h1>
+      <p class="tour-summary">{{ details.summary }}</p>
+      <div class="tour-facts">
+        <span>{{ details.duration }}</span>
+        <span>{{ details.templeCount }}</span>
+        <span>{{ details.meals }}</span>
+        <span>{{ details.familyFriendly }}</span>
+      </div>
+      <button class="primary-button" type="button" (click)="bookingOpen.set(true)">
+        {{ language() === 'ta' ? 'பயண விசாரணை' : language() === 'hi' ? 'यात्रा पूछताछ' : language() === 'fr' ? 'Demander un devis' : 'Ask for a trip quote' }}
+        <span aria-hidden="true">↗</span>
+      </button>
+    </div>
+    <div class="tour-art" aria-hidden="true"><span>நவக்கிரகம்</span><i>✦</i></div>
+  </header>
+
+  <section class="itinerary-section">
+    <div class="section-heading">
+      <p class="eyebrow">01 · {{ details.duration }}</p>
+      <h2>{{ details.itineraryTitle }}</h2>
+      <p>{{ details.sampleNotice }}</p>
+    </div>
+    <div class="itinerary-days">
+      @for (day of details.days; track $index) {
+        <article class="itinerary-day">
+          <div class="day-index">{{ language() === 'ta' ? 'நாள்' : language() === 'hi' ? 'दिन' : language() === 'fr' ? 'Jour' : 'DAY' }} <span>0{{ $index + 1 }}</span></div>
+          <div class="day-content">
+            <h3>{{ day.title }}</h3>
+            <p>{{ day.description }}</p>
+            <ol>
+              @for (slug of day.templeSlugs; track slug) {
+                <li><a [routerLink]="['/navagraha', slug]">{{ templeName(slug) }} <span aria-hidden="true">↗</span></a></li>
+              }
+            </ol>
+            <p class="overnight"><span aria-hidden="true">◷</span>{{ day.overnight }}</p>
+          </div>
+        </article>
+      }
+    </div>
+  </section>
+
+  <section class="included-section">
+    <div class="included-column">
+      <h2>{{ details.includedTitle }}</h2>
+      <ul>
+        @for (item of details.included; track $index) {
+          <li><span aria-hidden="true">✓</span>{{ item }}</li>
+        }
+      </ul>
+    </div>
+    <div class="excluded-column">
+      <h2>{{ details.excludedTitle }}</h2>
+      <ul>
+        @for (item of details.excluded; track $index) {
+          <li><span aria-hidden="true">—</span>{{ item }}</li>
+        }
+      </ul>
+    </div>
+  </section>
+
+  <section class="faq-section">
+    <div class="section-heading">
+      <p class="eyebrow">02 · BEFORE YOU TRAVEL</p>
+      <h2>{{ details.faqTitle }}</h2>
+    </div>
+    <div class="faq-list">
+      @for (faq of details.questions; track faq.question) {
+        <article class="faq-item">
+          <h3>{{ faq.question }}</h3>
+          <p>{{ faq.answer }}</p>
+        </article>
+      }
+    </div>
+  </section>
+
+  <section class="estimate-section">
+    <p class="eyebrow">{{ details.duration }} · {{ details.templeCount }}</p>
+    <h2>{{ details.estimateTitle }}</h2>
+    <p>{{ details.estimateDescription }}</p>
+    <span class="quote-price">{{ details.quoteStart }}</span>
+    <p class="quote-disclaimer">{{ details.quoteDisclaimer }}</p>
+    <button class="primary-button" type="button" (click)="bookingOpen.set(true)">
+      {{ language() === 'ta' ? 'விசாரணையைத் தொடங்குங்கள்' : language() === 'hi' ? 'पूछताछ शुरू करें' : language() === 'fr' ? 'Préparer une demande' : 'Start an enquiry' }}
+      <span aria-hidden="true">↗</span>
+    </button>
+  </section>
+</article>
+
+@if (bookingOpen()) {
+  <app-booking-enquiry-dialog
+    [tripTitle]="details.title"
+    [language]="language()"
+    (dismiss)="bookingOpen.set(false)"
+  />
+}

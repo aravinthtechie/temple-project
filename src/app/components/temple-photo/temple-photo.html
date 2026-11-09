@@ -1,0 +1,19 @@
+<figure class="temple-photo" [class.featured-gopuram]="photo() !== undefined">
+  <img
+    [src]="imagePath()"
+    [alt]="imageAlt()"
+    loading="eager"
+    decoding="async"
+    (error)="onImageError($event)"
+  />
+  <figcaption>
+    <span>{{ labels().photos }}</span>
+    @if (imageCredit(); as credit) {
+      <a [href]="credit.sourceUrl" target="_blank" rel="noopener noreferrer">
+        {{ labels().photoCredit }} {{ credit.author }} · {{ credit.license }}
+      </a>
+    } @else {
+      <span>{{ labels().photoSuppliedBy }}</span>
+    }
+  </figcaption>
+</figure>

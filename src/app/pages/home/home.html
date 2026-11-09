@@ -1,0 +1,257 @@
+@let content = copy();
+<div class="home-page">
+  <section class="home-hero">
+    <div class="hero-copy">
+      <p class="eyebrow">{{ siteName }} <span aria-hidden="true">·</span> {{ content.tagline }}</p>
+      <h1>{{ content.heroTitle }}</h1>
+      <p class="hero-description">{{ content.heroDescription }}</p>
+      <div class="hero-actions">
+        <a class="primary-button" href="#trip-planner">{{ content.planTrip }} <span aria-hidden="true">↗</span></a>
+        <a class="secondary-button" href="#packages">{{ content.explorePackages }}</a>
+      </div>
+      <a class="hero-text-link" routerLink="/navagraha">{{ content.navagrahaTour }} <span aria-hidden="true">→</span></a>
+    </div>
+    <div class="hero-art featured-gopuram">
+      <img
+        [src]="featuredPhoto.imagePath"
+        [alt]="featuredPhoto.alt[language()]"
+        fetchpriority="high"
+        (error)="onFeaturedPhotoError($event)"
+      />
+      <span class="hero-art-caption">{{ content.featuredTempleTitle }} · {{ content.tagline }}</span>
+    </div>
+  </section>
+
+  <section class="trip-planner" id="trip-planner" aria-labelledby="planner-title">
+    <div class="planner-heading">
+      <span class="planner-icon" aria-hidden="true">✦</span>
+      <h2 id="planner-title">{{ content.planTrip }}</h2>
+    </div>
+    <form #tripForm="ngForm" (ngSubmit)="submitTripPlan(tripForm)">
+      <label>
+        <span>{{ content.journeyOrigin }}</span>
+        <input name="origin" type="text" autocomplete="off" [placeholder]="label('originPlaceholder')" required ngModel />
+      </label>
+      <label>
+        <span>{{ content.journeyDate }}</span>
+        <input name="visitDate" type="date" [attr.aria-label]="label('datePlaceholder')" required ngModel />
+      </label>
+      <label>
+        <span>{{ content.journeyTravelers }}</span>
+        <input name="travelers" type="number" min="1" value="2" [placeholder]="label('travelerCountPlaceholder')" required ngModel />
+      </label>
+      <label class="temple-interest">
+        <span>{{ content.journeyTemples }}</span>
+        <input name="temples" type="text" [placeholder]="content.templeListPlaceholder" required ngModel />
+      </label>
+      <button class="primary-button" type="submit">{{ content.planTrip }} <span aria-hidden="true">→</span></button>
+    </form>
+  </section>
+
+  <section class="features-section">
+    <div class="section-heading">
+      <p class="eyebrow">01 · {{ siteName }}</p>
+      <h2>{{ content.featuresTitle }}</h2>
+    </div>
+    <div class="feature-grid">
+      <article class="feature-item">
+        <span class="feature-icon" aria-hidden="true">◷</span>
+        <h3>{{ content.featureItinerary }}</h3>
+        <p>{{ content.featureItineraryDescription }}</p>
+      </article>
+      <article class="feature-item">
+        <span class="feature-icon" aria-hidden="true">⌖</span>
+        <h3>{{ content.featureCar }}</h3>
+        <p>{{ content.featureCarDescription }}</p>
+      </article>
+      <article class="feature-item">
+        <span class="feature-icon" aria-hidden="true">◇</span>
+        <h3>{{ content.featureMeals }}</h3>
+        <p>{{ content.featureMealsDescription }}</p>
+      </article>
+      <article class="feature-item">
+        <span class="feature-icon" aria-hidden="true">✳</span>
+        <h3>{{ content.featureRituals }}</h3>
+        <p>{{ content.featureRitualsDescription }}</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="packages-section" id="packages">
+    <div class="section-heading section-heading-row">
+      <div>
+        <p class="eyebrow">02 · CAUVERY DELTA</p>
+        <h2>{{ content.packageTitle }}</h2>
+        <p>{{ content.packageDescription }}</p>
+      </div>
+      <a class="section-link" routerLink="/navagraha">{{ content.navagrahaTour }} <span aria-hidden="true">→</span></a>
+    </div>
+    <div class="package-grid">
+      @for (tour of tours; track tour.id) {
+        <article class="package-card" [class.package-featured]="tour.id === 'navagraha'">
+          <div class="package-meta">
+            <span>{{ tour.duration[language()] }}</span>
+            @if (tour.id === 'navagraha') {
+              <span class="package-star" aria-label="Featured">✦</span>
+            }
+          </div>
+          <h3>{{ tour.title[language()] }}</h3>
+          <p>{{ tour.summary[language()] }}</p>
+          <div class="package-bottom">
+            <span class="package-price">
+              <span>{{ content.quoteLabel }}</span>
+              <small>{{ content.pendingPrice }}</small>
+            </span>
+            @if (tour.id === 'navagraha') {
+              <a class="package-link" routerLink="/tours/navagraha">{{ content.viewPlan }} <span aria-hidden="true">→</span></a>
+            } @else {
+              <button class="package-link" type="button" (click)="openEnquiry(tour.title[language()])">
+                {{ content.customPackage }} <span aria-hidden="true">→</span>
+              </button>
+            }
+          </div>
+        </article>
+      }
+    </div>
+  </section>
+
+  <section class="featured-temple-section" aria-labelledby="featured-temple-title">
+    <div class="featured-temple-copy">
+      <p class="eyebrow">03 · {{ content.featuredTempleEyebrow }}</p>
+      <h2 id="featured-temple-title">{{ content.featuredTempleTitle }}</h2>
+      <p>{{ content.featuredTempleDescription }}</p>
+      <a class="secondary-button" [routerLink]="['/navagraha', featuredTemple.slug]">
+        {{ content.featuredTempleCta }} <span aria-hidden="true">→</span>
+      </a>
+    </div>
+    <app-temple-photo
+      class="featured-temple-photo"
+      [temple]="featuredTemple"
+      [language]="language()"
+      [photo]="featuredPhoto"
+    />
+  </section>
+
+  <section class="pariharam-section" id="pariharam">
+    <div class="pariharam-copy">
+      <p class="eyebrow">03 · FAITH & TRADITION</p>
+      <h2>{{ content.pariharamTitle }}</h2>
+      <p>{{ content.pariharamDescription }}</p>
+      <p class="faith-disclaimer">{{ content.faithDisclaimer }}</p>
+    </div>
+    <div class="pariharam-list">
+      @for (item of pariharamItems; track item) {
+        <div class="pariharam-item"><span aria-hidden="true">✦</span>{{ content[item] }}</div>
+      }
+    </div>
+  </section>
+
+  <section class="steps-section">
+    <div class="section-heading">
+      <p class="eyebrow">04 · A CLEAR PLAN</p>
+      <h2>{{ content.howTitle }}</h2>
+    </div>
+    <div class="steps-grid">
+      @for (step of content.steps; track $index) {
+        <article class="step-item">
+          <span class="step-number">0{{ $index + 1 }}</span>
+          <h3>{{ step.title }}</h3>
+          <p>{{ step.description }}</p>
+        </article>
+      }
+    </div>
+  </section>
+
+  <section class="heritage-section" id="heritage">
+    <div class="heritage-art" aria-hidden="true"><span>சோழர்</span><span>✦</span><span>கலை</span></div>
+    <div class="heritage-copy">
+      <p class="eyebrow">05 · HISTORY · ARCHITECTURE · LEARNING</p>
+      <h2>{{ content.heritageTitle }}</h2>
+      <p>{{ content.heritageDescription }}</p>
+      <div class="heritage-tags">
+        <span>{{ language() === 'ta' ? 'சோழர் கோவில் மரபு' : language() === 'hi' ? 'चोल मंदिर विरासत' : language() === 'fr' ? 'Patrimoine des temples Chola' : 'Chola temple trail' }}</span>
+        <span>{{ language() === 'ta' ? 'கோவில் கட்டிடக்கலை' : language() === 'hi' ? 'मंदिर वास्तुकला' : language() === 'fr' ? 'Architecture des temples' : 'Temple architecture' }}</span>
+        <span>{{ language() === 'ta' ? 'மாணவர் கல்விச் சுற்றுலா' : language() === 'hi' ? 'विद्यार्थी शैक्षिक यात्राएँ' : language() === 'fr' ? 'Visites éducatives' : 'Student learning tours' }}</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="wedding-vehicle-section" id="weddings">
+    <article class="service-card wedding-card">
+      <p class="eyebrow">06 · CELEBRATIONS</p>
+      <h2>{{ content.weddingsTitle }}</h2>
+      <p>{{ content.weddingsDescription }}</p>
+      <button class="secondary-button" type="button" (click)="openEnquiry(content.weddingsTitle)">{{ content.askWedding }} <span aria-hidden="true">→</span></button>
+    </article>
+    <article class="service-card vehicle-card">
+      <p class="eyebrow">07 · GETTING AROUND</p>
+      <h2>{{ content.vehiclesTitle }}</h2>
+      <p>{{ content.vehiclesDescription }}</p>
+      <span class="vehicle-sizes">{{ content.vehicleSizes }}</span>
+      <button class="text-link" type="button" (click)="openEnquiry(content.vehiclesTitle)">{{ content.customPackage }} <span aria-hidden="true">→</span></button>
+    </article>
+  </section>
+
+  <section class="reviews-section">
+    <span class="review-mark" aria-hidden="true">“</span>
+    <p class="eyebrow">08 · TRAVELLER STORIES</p>
+    <h2>{{ content.reviewTitle }}</h2>
+    <p>{{ content.reviewDescription }}</p>
+    <div class="review-placeholders" aria-label="Review placeholders">
+      @for (placeholder of [1, 2, 3]; track placeholder) {
+        <article class="review-placeholder">
+          <span class="placeholder-stars" aria-hidden="true">★★★★★</span>
+          <p>{{ content.reviewPlaceholder }}</p>
+          <span>{{ content.reviewNamePlaceholder }}</span>
+          <small>{{ content.reviewTripPlaceholder }}</small>
+        </article>
+      }
+    </div>
+  </section>
+
+  <section class="partner-section">
+    <div>
+      <p class="eyebrow">09 · FOR THE TRADE</p>
+      <h2>{{ content.partnerTitle }}</h2>
+      <p>{{ content.partnerDescription }}</p>
+    </div>
+    <button class="secondary-button" type="button" (click)="openEnquiry(content.partnerTitle)">{{ content.partnerCta }} <span aria-hidden="true">→</span></button>
+  </section>
+
+  <section class="contact-section" id="contact">
+    <p class="eyebrow">TEMPLE BUDDY · CAUVERY DELTA</p>
+    <h2>{{ content.contactTitle }}</h2>
+    <p>{{ content.contactUnavailable }}</p>
+    <div class="contact-options">
+      @if (siteContact.phone) {
+        <a [href]="'tel:' + siteContact.phone">{{ siteContact.phone }}</a>
+      }
+      @if (siteContact.email) {
+        <a [href]="'mailto:' + siteContact.email">{{ siteContact.email }}</a>
+      } @else {
+        <span class="contact-placeholder">{{ content.emailPlaceholder }}</span>
+      }
+      @if (siteContact.officeAddress) {
+        <span>{{ content.officeAddress }}: {{ siteContact.officeAddress }}</span>
+      }
+      @if (siteContact.whatsappNumber) {
+        <a [href]="'https://wa.me/' + siteContact.whatsappNumber" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+      }
+    </div>
+    @if (siteContact.phone) {
+      <a class="primary-button contact-call" [href]="'tel:' + siteContact.phone">
+        {{ content.contactCall }} · {{ siteContact.phone }} <span aria-hidden="true">↗</span>
+      </a>
+    }
+    <a class="contact-navagraha" routerLink="/navagraha">{{ content.navagrahaTour }} <span aria-hidden="true">→</span></a>
+  </section>
+</div>
+
+@if (bookingOpen()) {
+  <app-booking-enquiry-dialog
+    [tripTitle]="selectedTrip()"
+    [tripDetails]="tripDetails()"
+    [language]="language()"
+    (dismiss)="bookingOpen.set(false)"
+  />
+}

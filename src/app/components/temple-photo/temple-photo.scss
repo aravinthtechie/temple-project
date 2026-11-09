@@ -1,0 +1,43 @@
+.temple-photo {
+  position: relative;
+  min-width: 0;
+  margin: 0;
+  border-radius: 4px;
+  background: var(--surface);
+  box-shadow: 0 20px 50px rgb(34 30 23 / 12%);
+}
+
+.temple-photo img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.temple-photo img[hidden] {
+  display: none;
+}
+
+.temple-photo.featured-gopuram img {
+  aspect-ratio: 3 / 4;
+  object-fit: contain;
+  background: color-mix(in srgb, var(--gold) 9%, var(--surface));
+}
+
+.temple-photo figcaption {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 16px;
+  padding: 12px 14px;
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.temple-photo figcaption a {
+  color: var(--accent-strong);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}

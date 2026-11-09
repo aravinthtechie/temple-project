@@ -1,0 +1,59 @@
+<div class="site-shell" [attr.data-theme]="theme()">
+  <header class="site-header">
+    <a class="brand" routerLink="/" [attr.aria-label]="siteName">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 42 42" fill="none">
+          <circle cx="21" cy="21" r="18" stroke="currentColor" stroke-width="1.5" />
+          <circle cx="21" cy="21" r="3" fill="currentColor" />
+          <path d="M21 5v8m0 16v8M5 21h8m16 0h8M9.7 9.7l5.7 5.7m11.2 11.2 5.7 5.7m0-22.6-5.7 5.7m-11.2 11.2-5.7 5.7" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" />
+        </svg>
+      </span>
+      <span class="brand-name">{{ siteName }}</span>
+    </a>
+
+    <nav class="site-nav" [class.mobile-open]="mobileMenuOpen()" [attr.aria-label]="homeText('navPackages')">
+      <a class="nav-link" routerLink="/" fragment="packages" (click)="closeMobileMenu()">{{ homeText('navPackages') }}</a>
+      <a class="nav-link" routerLink="/" fragment="pariharam" (click)="closeMobileMenu()">{{ homeText('navPariharam') }}</a>
+      <a class="nav-link" routerLink="/" fragment="heritage" (click)="closeMobileMenu()">{{ homeText('navHeritage') }}</a>
+      <a class="nav-link" routerLink="/navagraha" (click)="closeMobileMenu()">{{ homeText('navNavagraha') }}</a>
+      <a class="nav-link nav-plan" routerLink="/" fragment="trip-planner" (click)="closeMobileMenu()">{{ homeText('navContact') }}</a>
+    </nav>
+
+    <div class="header-actions">
+      <button
+        class="mobile-menu-toggle"
+        type="button"
+        [attr.aria-label]="mobileMenuOpen() ? text('closeMenu') : text('openMenu')"
+        [attr.aria-expanded]="mobileMenuOpen()"
+        (click)="mobileMenuOpen.update((open) => !open)"
+      >
+        <span></span><span></span>
+      </button>
+      <label class="language-picker">
+        <span class="visually-hidden">{{ text('languageLabel') }}</span>
+        <select [value]="language()" (change)="setLanguage($event)">
+          @for (option of languages; track option.value) {
+            <option [value]="option.value">{{ option.label }}</option>
+          }
+        </select>
+      </label>
+      <label class="theme-picker">
+        <span class="visually-hidden">{{ text('theme') }}</span>
+        <select [value]="theme()" (change)="setTheme($event)">
+          @for (option of themes; track option.value) {
+            <option [value]="option.value">{{ text(option.label) }}</option>
+          }
+        </select>
+      </label>
+    </div>
+  </header>
+
+  <main>
+    <router-outlet />
+  </main>
+
+  <footer class="site-footer">
+    <span>{{ siteName }} · {{ homeText('tagline') }}</span>
+    <span class="footer-symbol" aria-hidden="true">✦</span>
+  </footer>
+</div>

@@ -1,0 +1,134 @@
+@use './app/pages/home/home';
+@use './app/pages/navagraha-tour/navagraha-tour';
+
+.site-shell {
+  --page: #f7f5ef;
+  --surface: #fffefa;
+  --ink: #242a25;
+  --muted: #73796e;
+  --line: #e6e2d7;
+  --accent: #9c6845;
+  --accent-strong: #70452d;
+  --gold: #c29a5b;
+}
+
+.site-shell[data-theme='forest'] {
+  --page: #f2f5ef;
+  --surface: #fcfef9;
+  --ink: #26332b;
+  --muted: #68766d;
+  --line: #dce5dc;
+  --accent: #4b7457;
+  --accent-strong: #31533d;
+  --gold: #b39355;
+}
+
+.site-shell[data-theme='sunrise'] {
+  --page: #fff6ed;
+  --surface: #fffdfa;
+  --ink: #362a26;
+  --muted: #79665f;
+  --line: #eedfd2;
+  --accent: #b25e3f;
+  --accent-strong: #7c3e2d;
+  --gold: #d9a24e;
+}
+
+.site-shell[data-theme='ocean'] {
+  --page: #f1f6f7;
+  --surface: #fcffff;
+  --ink: #243138;
+  --muted: #62747a;
+  --line: #d8e4e6;
+  --accent: #397589;
+  --accent-strong: #245566;
+  --gold: #c59c5e;
+}
+
+.site-shell[data-theme='night'] {
+  --page: #171b19;
+  --surface: #202623;
+  --ink: #f4f0e5;
+  --muted: #b6b9ad;
+  --line: #39413b;
+  --accent: #e0ad7b;
+  --accent-strong: #f1c195;
+  --gold: #d7b678;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  min-width: 320px;
+  scroll-behavior: smooth;
+}
+
+body {
+  min-width: 320px;
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+.primary-button {
+  display: inline-flex;
+  min-height: 46px;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  padding: 0 19px;
+  border: 1px solid var(--accent);
+  border-radius: 2px;
+  color: #fff;
+  background: var(--accent);
+  font: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 160ms ease, border-color 160ms ease, transform 160ms ease;
+}
+
+.primary-button:hover {
+  transform: translateY(-1px);
+  border-color: var(--accent-strong);
+  background: var(--accent-strong);
+}
+
+.primary-button span {
+  font-size: 15px;
+  font-weight: 400;
+}
+
+.primary-button:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+::selection {
+  color: #fff;
+  background: #9c6845;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

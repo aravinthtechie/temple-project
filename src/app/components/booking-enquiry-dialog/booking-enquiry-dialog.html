@@ -1,0 +1,51 @@
+<div class="dialog-backdrop" (click)="closeFromBackdrop($event)">
+  <section class="booking-dialog" role="dialog" aria-modal="true" aria-labelledby="booking-title">
+    <button class="dialog-close" type="button" [attr.aria-label]="text('cancel')" (click)="dismiss.emit()">×</button>
+    <p class="eyebrow">{{ temple()?.translations?.[language()]?.name ?? tripTitle() }}</p>
+    <h2 id="booking-title">{{ text('bookingEnquiry') }}</h2>
+    <p class="dialog-description">{{ text('bookingDescription') }}</p>
+    @if (contact.phone) {
+      <a class="booking-phone" [href]="'tel:' + contact.phone">{{ contactCallLabel() }} · {{ contact.phone }}</a>
+    }
+    <form #enquiryForm="ngForm" (ngSubmit)="sendEnquiry(enquiryForm)">
+      <label>
+        <span>{{ text('travelerName') }}</span>
+        <input [(ngModel)]="enquiry.name" name="name" type="text" autocomplete="name" [placeholder]="text('namePlaceholder')" required />
+      </label>
+      <label>
+        <span>{{ text('travelerEmail') }}</span>
+        <input [(ngModel)]="enquiry.email" name="email" type="email" autocomplete="email" [placeholder]="text('emailPlaceholder')" required />
+      </label>
+      <label>
+        <span>{{ text('travelerPhone') }}</span>
+        <input [(ngModel)]="enquiry.phone" name="phone" type="tel" autocomplete="tel" [placeholder]="text('phonePlaceholder')" />
+      </label>
+      <label>
+        <span>{{ text('templeOfficeEmail') }}</span>
+        <input [(ngModel)]="enquiry.recipient" name="recipient" type="email" [placeholder]="text('recipientPlaceholder')" />
+      </label>
+      <label>
+        <span>{{ text('visitDate') }}</span>
+        <input [(ngModel)]="enquiry.visitDate" name="visitDate" type="date" [attr.aria-label]="text('datePlaceholder')" />
+      </label>
+      @if (!temple()) {
+        <label>
+          <span>{{ text('journeyOrigin') }}</span>
+          <input [(ngModel)]="enquiry.origin" name="origin" type="text" autocomplete="off" [placeholder]="text('originPlaceholder')" />
+        </label>
+        <label>
+          <span>{{ text('journeyTravelers') }}</span>
+          <input [(ngModel)]="enquiry.travelers" name="travelers" type="number" min="1" [placeholder]="text('travelerCountPlaceholder')" />
+        </label>
+      }
+      <label>
+        <span>{{ text('message') }}</span>
+        <textarea [(ngModel)]="enquiry.message" name="message" rows="3" [placeholder]="text('messagePlaceholder')" required></textarea>
+      </label>
+      <div class="dialog-actions">
+        <button class="text-button" type="button" (click)="dismiss.emit()">{{ text('cancel') }}</button>
+        <button class="primary-button" type="submit">{{ text('sendEnquiry') }} <span aria-hidden="true">↗</span></button>
+      </div>
+    </form>
+  </section>
+</div>

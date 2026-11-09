@@ -1,0 +1,127 @@
+.dialog-backdrop {
+  position: fixed;
+  z-index: 10;
+  inset: 0;
+  display: grid;
+  overflow-y: auto;
+  place-items: center;
+  padding: 22px;
+  background: rgb(16 19 17 / 62%);
+  backdrop-filter: blur(5px);
+}
+
+.booking-dialog {
+  position: relative;
+  width: min(100%, 520px);
+  max-height: min(90vh, 840px);
+  overflow-y: auto;
+  padding: 32px;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  color: var(--ink);
+  background: var(--surface);
+  box-shadow: 0 28px 80px rgb(0 0 0 / 25%);
+}
+
+.dialog-close {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  width: 32px;
+  height: 32px;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  color: var(--ink);
+  background: transparent;
+  font-size: 21px;
+  cursor: pointer;
+}
+
+.booking-dialog .eyebrow {
+  margin: 0 40px 10px 0;
+}
+
+.booking-dialog h2 {
+  margin: 0;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 32px;
+  font-weight: 400;
+}
+
+.dialog-description {
+  margin: 12px 0 22px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.booking-phone {
+  display: inline-block;
+  margin: -10px 0 17px;
+  color: var(--accent-strong);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.booking-dialog form {
+  display: grid;
+  gap: 13px;
+}
+
+.booking-dialog label {
+  display: grid;
+  gap: 7px;
+  color: var(--ink);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.booking-dialog input,
+.booking-dialog textarea {
+  width: 100%;
+  padding: 11px 12px;
+  border: 1px solid var(--line);
+  border-radius: 2px;
+  color: var(--ink);
+  background: var(--page);
+  font: inherit;
+  font-size: 13px;
+}
+
+.booking-dialog textarea {
+  resize: vertical;
+}
+
+.booking-dialog input:focus,
+.booking-dialog textarea:focus {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+}
+
+.form-hint {
+  color: #b34235;
+  font-size: 11px;
+}
+
+.dialog-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 18px;
+  margin-top: 5px;
+}
+
+.text-button {
+  border: 0;
+  color: var(--muted);
+  background: transparent;
+  font: inherit;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+@media (max-width: 700px) {
+  .booking-dialog {
+    padding: 26px 21px;
+  }
+}

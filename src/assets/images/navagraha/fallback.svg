@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" role="img" aria-labelledby="title description">
+  <title id="title">Photograph unavailable</title>
+  <desc id="description">A neutral abstract placeholder, not a temple photograph.</desc>
+  <defs>
+    <linearGradient id="background" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ded8ca"/>
+      <stop offset="1" stop-color="#c5bca9"/>
+    </linearGradient>
+    <pattern id="grid" width="56" height="56" patternUnits="userSpaceOnUse">
+      <path d="M56 0H0V56" fill="none" stroke="#fff" stroke-opacity=".16"/>
+    </pattern>
+  </defs>
+  <path fill="url(#background)" d="M0 0h1200v800H0z"/>
+  <path fill="url(#grid)" d="M0 0h1200v800H0z"/>
+  <circle cx="600" cy="345" r="96" fill="none" stroke="#8f8067" stroke-opacity=".55" stroke-width="2"/>
+  <path d="M560 345a40 40 0 1 1 80 0c0 26-40 48-40 48s-40-22-40-48Z" fill="none" stroke="#8f8067" stroke-width="3"/>
+  <circle cx="600" cy="342" r="5" fill="#8f8067"/>
+  <text x="600" y="506" fill="#534d41" font-family="Arial, sans-serif" font-size="27" text-anchor="middle">Photograph unavailable</text>
+</svg>

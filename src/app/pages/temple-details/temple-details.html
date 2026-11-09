@@ -1,0 +1,87 @@
+@if (temple(); as currentTemple) {
+  @let content = currentTemple.translations[language()];
+  <article class="details-page">
+    <a class="back-link" routerLink="/navagraha"><span aria-hidden="true">←</span> {{ text('backToGallery') }}</a>
+
+    <header class="details-hero">
+      <div class="details-copy">
+        <p class="planet-label"><span aria-hidden="true">✦</span> {{ planetName(currentTemple, language()) }}</p>
+        <h1>{{ content.name }}</h1>
+        @if (language() !== 'ta') {
+          <p class="details-tamil" lang="ta">{{ currentTemple.translations.ta.name }}</p>
+        }
+        <p class="details-location"><span aria-hidden="true">⌖</span>{{ content.location }}</p>
+        <p class="details-description">{{ content.description }}</p>
+        <button class="primary-button" type="button" (click)="bookingOpen.set(true)">
+          {{ text('bookingEnquiry') }} <span aria-hidden="true">↗</span>
+        </button>
+      </div>
+
+      <app-temple-photo [temple]="currentTemple" [language]="language()" />
+    </header>
+
+    <div class="details-columns">
+      <section class="info-card history-card">
+        <span class="section-index">01</span>
+        <h2>{{ text('history') }}</h2>
+        <p>{{ content.history }}</p>
+      </section>
+      <section class="info-card significance-card">
+        <span class="section-index">02</span>
+        <h2>{{ text('significance') }}</h2>
+        <p>{{ content.significance }}</p>
+      </section>
+    </div>
+
+    <div class="details-columns secondary-columns">
+      <section class="info-card visit-card">
+        <span class="section-icon" aria-hidden="true">⌖</span>
+        <h2>{{ text('location') }}</h2>
+        <p class="address">{{ content.address }}</p>
+        <p class="route-label">{{ text('route') }}</p>
+        <p>{{ content.route }}</p>
+      </section>
+      <section class="info-card hours-card">
+        <span class="section-icon" aria-hidden="true">◷</span>
+        <h2>{{ text('openingHours') }}</h2>
+        @if (currentTemple.openingHours.schedule && currentTemple.openingHours.verifiedAt && currentTemple.openingHours.sourceUrl) {
+          <p class="hours-value">{{ currentTemple.openingHours.schedule }}</p>
+          <p>{{ text('hoursVerification') }}</p>
+          <a [href]="currentTemple.openingHours.sourceUrl" target="_blank" rel="noopener noreferrer">{{ text('browseOriginal') }}</a>
+        } @else {
+          <p class="hours-value">{{ text('hoursUnavailable') }}</p>
+          <p>{{ text('hoursVerification') }}</p>
+        }
+      </section>
+    </div>
+
+    @if (nearbyTemples().length > 0) {
+      <section class="nearby-section">
+        <div class="nearby-heading">
+          <p class="eyebrow">{{ text('circuitEyebrow') }}</p>
+          <h2>{{ text('nearbyTemples') }}</h2>
+        </div>
+        <div class="nearby-grid">
+          @for (nearby of nearbyTemples(); track nearby.slug) {
+            <app-temple-card [temple]="nearby" [language]="language()" />
+          }
+        </div>
+      </section>
+    }
+  </article>
+
+  @if (bookingOpen()) {
+    <app-booking-enquiry-dialog
+      [temple]="currentTemple"
+      [language]="language()"
+      (dismiss)="bookingOpen.set(false)"
+    />
+  }
+} @else {
+  <section class="not-found">
+    <span class="eyebrow">404 · NAVAGRAHA</span>
+    <h1>{{ text('notFound') }}</h1>
+    <p>{{ text('notFoundDescription') }}</p>
+    <a class="primary-button" routerLink="/navagraha">{{ text('returnHome') }} <span aria-hidden="true">→</span></a>
+  </section>
+}
